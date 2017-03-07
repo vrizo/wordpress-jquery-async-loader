@@ -110,7 +110,7 @@ class jquery_async_loader_options {
 	// Add plugin links: Settings and Author web site:
 	public function add_plugin_links( $links ) {
 		$plugin_links = array(
-			'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=products&section=display' ) . '">' . __( 'Settings', 'jquery-async-loader' ) . '</a>',
+			'<a href="' . admin_url( 'options-general.php?page=jquery_async_loader' ) . '">' . __( 'Settings', 'jquery-async-loader' ) . '</a>',
 			'<a href="http://squirrel-research.ru/" target="_blank">' . __( 'Author', 'jquery-async-loader' ) . '</a>' 
 		);
 		return array_merge( $plugin_links, $links );
