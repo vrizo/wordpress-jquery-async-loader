@@ -7,7 +7,7 @@ Stable tag: trunk
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-This plugin asynchronously load jQuery and plugins without "jQuery is undefined" errors.
+This plugin asynchronously loads jQuery and its plugins without "jQuery is undefined" errors.
 
 == Description ==
 
@@ -33,7 +33,7 @@ It's highly recommended to use any concatenate plugin, e.g., Fast Velocity Minif
 = How it works? =
 1. The plugin loads small JavaScript code in the header. This is jQl developed by Cédric Morin (jQuery async loader);
 1. Then it loads minified jQuery from Google CDN (optional, you can disable it on settings page);
-1. And finally it replaces all <script> tags with a special function.
+1. And finally, it replaces all <script> tags with a special function.
 
 = I see scripts loaded through <script> tag, is it OK? =
 Yes, that's okay for Google Analytics, Facebook pixel, Twitter tag and many other external scripts.
