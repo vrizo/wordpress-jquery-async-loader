@@ -1,6 +1,6 @@
 === jQuery & Plugins Asynchronous Loader ===
 Contributors: killbill-sbor
-Tags: jquery, loader, above the fold, optimization, pagespeed, insights, minify, jquery is undefined
+Tags: jquery, loader, above the fold, optimization, pagespeed, insights, minify, jquery is undefined, render blocking
 Requires at least: 4.1
 Tested up to: 4.7.2
 Stable tag: trunk
@@ -11,14 +11,13 @@ This plugin asynchronously load jQuery and plugins without "jQuery is undefined"
 
 == Description ==
 
-Loading of JavaScript resources should be done asynchronously, in a non-blocking manner, so the load time of your webpage will not be affected. But using of deferring or async loading of jQuery causes lots of problems with jQuery plugins. This plugin replaces default Wordpress's JS loader with a special jQuery loader (jQl), that's why there are no any errors with jQuery plugins.
-Maintained by [me](https://www.upwork.com/freelancers/~019842b9db9697a094).
+Loading of JavaScript resources should be done asynchronously, in a non-blocking manner, so the load time of your webpage will not be affected (it would not be delayed by render-blocking JavaScript). But using of deferring or async loading of jQuery causes lots of problems with jQuery plugins. This plugin replaces default Wordpress's JS loader with a special jQuery loader (jQl), that's why there are no any errors with jQuery plugins.
 
 It's highly recommended to use any concatenate plugin, e.g., Fast Velocity Minify or WP Fastest Cache. Please, do not add jQuery to the ignore list, because this plugin fixes “undefined jQuery” errors on the console log. Also, it is allowed to use defer or async parsing of JS files.
 
 It requires Wordpress 4.1 and newer.
 
-It is available in English :gb:/:us: only for now.
+It is available in English and Russian.
 
 
 == Installation ==
@@ -45,6 +44,10 @@ But please make sure that all your theme and plugins scripts are included correc
 1. jQuery & Plugins Async Loader Settings page
 
 == Changelog ==
+
+= 1.1 =
+* Added admin pages processing option
+* Russian translation
 
 = 1.0 =
 * Initial release

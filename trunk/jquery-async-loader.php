@@ -5,7 +5,7 @@
  * Description: Loading of JavaScript resources should be done asynchronously, in a non-blocking manner, so the load time of your webpage will not be affected. But using of deferring or async loading of jQuery causes lots of problems with jQuery plugins. This plugin replaces default Wordpress's JS loader with a special jQuery loader (jQl), that's why there are no any errors with jQuery plugins.
  * Author: Vitalii Rizo
  * Author URI: http://squirrel-research.ru
- * Version: 1.0
+ * Version: 1.1
  * Text Domain: jquery-async-loader
  *
  * Copyright: (c) 2017 Vitalii Rizo (kb@kernel-it.ru)
@@ -34,7 +34,7 @@ add_action( 'plugins_loaded', 'init_jquery_async_loader_options' );
 
 class jquery_async_loader_options {
 	// Current plugin version:
-	const VERSION = '1.0.0';
+	const VERSION = '1.1.0';
 	
 	// @var jquery_async_loader_options single instance of this plugin
 	protected static $instance;
@@ -64,6 +64,13 @@ class jquery_async_loader_options {
 				$this,
 				'add_plugin_links' 
 			) );
+
+			// add jQuery loader
+			add_action( 'admin_enqueue_scripts', array (
+				$this,
+				'jQuery_loader_script'
+			), 5 );
+
 		} else {
 			// Do things in front end
 			add_action( 'init', array (
@@ -76,14 +83,15 @@ class jquery_async_loader_options {
 				$this,
 				'jQuery_loader_script'
 			), 5 );
-			
-			// Modify <script> tags
-			add_filter( 'script_loader_tag', array (
-				$this,
-				'modify_script_tags'
-			), 10, 2 );
 
 		}
+
+		// Modify <script> tags
+		add_filter( 'script_loader_tag', array (
+			$this,
+			'modify_script_tags'
+		), 10, 2 );
+
 	}
 	
 	// Ensures only one instance is/can be loaded
@@ -145,8 +153,15 @@ class jquery_async_loader_options {
 	}
 
 	public function modify_script_tags( $tag ) {
+
+		$defaults = array(
+			'replace_jquery' => 1,
+			'enable_on_backend' => 0
+		);
+		$options = wp_parse_args(get_option('jquery_async_loader_options'), $defaults);
+
 		// Additional check to be sure that this code is not executed on admin pages:
-		if( is_admin() ) {
+		if( ( is_admin() ) && ( $options['enable_on_backend'] !== 1 ) ) {
 			return $tag;
 		}
 		
@@ -205,20 +220,21 @@ class jquery_async_loader_options {
 			$_REQUEST['settings-updated'] = false;
 		?>
 		<div class="wrap">
-			<h1><?php _e( 'jQuery & Plugins Async Loader Settings', 'jquery_async_loader' ) ?></h1>
+			<h1><?php _e( 'jQuery & Plugins Async Loader Settings', 'jquery-async-loader' ) ?></h1>
 			
 			<form action="options.php" method="post">
 				<?php
 				settings_fields('jquery_async_loader_options');
 				$defaults = array(
 					'replace_jquery' => 1,
+					'enable_on_backend' => 0
 				);
 				$options = wp_parse_args(get_option('jquery_async_loader_options'), $defaults);
 				?>
 			
-				<h2 class="title"><?php _e('Description and recommendations', 'jquery_async_loader'); ?></h2>
+				<h2 class="title"><?php _e('Description and recommendations', 'jquery-async-loader'); ?></h2>
 
-				<p><?php _e( "Loading of JavaScript resources should be done asynchronously, in a non-blocking manner, so the load time of your webpage will not be affected. But using of deferring or async loading of jQuery causes lots of problems with jQuery plugins. This plugin replaces default Wordpress's JS loader with a special jQuery loader (jQl), that's why there are no any errors with jQuery plugins.", 'jquery_async_loader' ); ?></p>
+				<p><?php _e( 'Loading of JavaScript resources should be done asynchronously, in a non-blocking manner, so the load time of your webpage will not be affected. But using of deferring or async loading of jQuery causes lots of problems with jQuery plugins. This plugin replaces default Wordpress\'s JS loader with a special jQuery loader (jQl), that\'s why there are no any errors with jQuery plugins.', 'jquery-async-loader' ); ?></p>
 
 				<p><?php echo sprintf( /* translators: %1$s and %2$s are <strong> tags. %3$s and %4$s are links to the plugins. %5$s and %$6s code tags with quotes. */ esc_html__( '%1$sIt\'s highly recommended to use any concatenate plugin,%2$s e.g., %3$s or %4$s.  Please, do not add jQuery to the ignore list, because this plugin fixes %5$sundefined jQuery%6$s errors on the console log. Also, it is allowed to use defer or async parsing of JS files.', 'jquery-async-loader' ), '<strong>', '</strong>', '<a href="https://wordpress.org/plugins/fast-velocity-minify/" target="_blank">Fast Velocity Minify</a>', '<a href="https://wordpress.org/plugins/wp-fastest-cache/" target="_blank">WP Fastest Cache</a>', '<code>&#147;', '&#148;</code>' ); ?></p>
 
@@ -229,13 +245,18 @@ class jquery_async_loader_options {
 						<td><input id="jquery_async_loader_options[replace_jquery]" name="jquery_async_loader_options[replace_jquery]" type="checkbox" value="1" <?php checked( '1', $options['replace_jquery'] ); ?> />
 						<label class="description" for="jquery_async_loader_options[replace_jquery]"><?php _e( 'Replace', 'jquery-async-loader' ); ?></label></td>
 					</tr>
+					<tr valign="top">
+						<th scope="row"><?php _e( 'Use it on the&nbsp;Back-end (admin&nbsp;pages)', 'jquery-async-loader' ); ?></th>
+						<td><input id="jquery_async_loader_options[enable_on_backend]" name="jquery_async_loader_options[enable_on_backend]" type="checkbox" value="1" <?php checked( '1', $options['enable_on_backend'] ); ?> />
+						<label class="description" for="jquery_async_loader_options[enable_on_backend]"><?php _e( 'Enable', 'jquery-async-loader' ); ?></label><p class="description"><?php _e('It might be useful sometimes, but it\'s recommended to disable this option.', 'jquery-async-loader' ); ?></p></td>
+					</tr>
 
 				</table>
 				<p class="submit">
 					<input type="submit" class="button-primary" value="<?php _e( 'Save Options', 'jquery-async-loader' ); ?>" />
 				</p>
 
-				<p><?php echo sprintf( /* translators: %1$s and %2$s are <code> tags. */ esc_html__( 'For advanced users: If you\'re seeing any scripts loaded using %1$s<script>%2$s tag in your page source code (excluding Google Analytics, FB pixel, etc), please make sure that all the scripts are included correctly through %1$swp_enqueue_script%2$s or similar functions.', 'jquery_async_loader' ), '<code>', '</code>' ); ?></p>
+				<p><?php echo sprintf( /* translators: %1$s and %2$s are <code> tags. */ esc_html__( 'For advanced users: If you\'re seeing any scripts loaded using %1$s<script>%2$s tag in your page source code (excluding Google Analytics, FB pixel, etc), please make sure that all the scripts are included correctly through %1$swp_enqueue_script%2$s or similar functions.', 'jquery-async-loader' ), '<code>', '</code>' ); ?></p>
 
 				<p><?php echo sprintf( /* translators: %1$s is a link to Cerdic Morin github page. */ esc_html__( 'Special thanks to %1$s, who is the author of jQl.', 'jquery-async-loader' ), '<a href="https://github.com/Cerdic/jQl" target="_blank">Cédric Morin</a>' ); ?></p>
 			</form>
@@ -249,6 +270,10 @@ class jquery_async_loader_options {
 		if ( ! isset( $input['replace_jquery'] ) )
 			$input['replace_jquery'] = null;
 		$input['replace_jquery'] = ( $input['replace_jquery'] == 1 ? 1 : 0 );
+
+		if ( ! isset( $input['enable_on_backend'] ) )
+			$input['enable_on_backend'] = null;
+		$input['enable_on_backend'] = ( $input['enable_on_backend'] == 1 ? 1 : 0 );
 
 		return $input;
 	}

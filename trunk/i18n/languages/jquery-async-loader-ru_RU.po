@@ -1,0 +1,136 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: jQuery Asynchronous Loader\n"
+"POT-Creation-Date: 2017-03-08 22:35+0300\n"
+"PO-Revision-Date: 2017-03-08 22:35+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"X-Poedit-Basepath: ../..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__\n"
+"X-Poedit-SearchPath-0: jquery-async-loader.php\n"
+
+#: jquery-async-loader.php:110
+#, php-format
+msgid "You cannot clone instances of %s."
+msgstr "Вы не можете клонировать экземпляры %s."
+
+#: jquery-async-loader.php:115
+#, php-format
+msgid "You cannot unserialize instances of %s."
+msgstr "Вы не можете десериализировать экземпляры %s."
+
+#: jquery-async-loader.php:121 jquery-async-loader.php:241
+msgid "Settings"
+msgstr "Настройки"
+
+#: jquery-async-loader.php:122
+msgid "Author"
+msgstr "Автор"
+
+#: jquery-async-loader.php:192
+msgid ""
+"%1$jQuery Async Loader plugin is inactive.%2$s This plugin requires "
+"Wordpress 4.1 or newer. Please %3$supdate Wordpress to version 4.1 or newer"
+"%4$s"
+msgstr ""
+"%1$Плагин jQuery Async Loader неактивен.%2$s Этот плагин требует Wordpress "
+"4.1 или новее. Пожалуйста, %3$sобновите Wordpress до версии 4.1 или новее%4$s"
+
+#: jquery-async-loader.php:211
+msgid "jQuery Async Loader Settings"
+msgstr "Настройка jQuery Async Loader"
+
+#: jquery-async-loader.php:211
+msgid "jQuery Async Loader"
+msgstr "jQuery Async Loader"
+
+#: jquery-async-loader.php:223
+msgid "jQuery & Plugins Async Loader Settings"
+msgstr "Настройки плагина jQuery & Plugins Async Loader"
+
+#: jquery-async-loader.php:235
+msgid "Description and recommendations"
+msgstr "Описание и рекомендации"
+
+#: jquery-async-loader.php:237
+msgid ""
+"Loading of JavaScript resources should be done asynchronously, in a non-"
+"blocking manner, so the load time of your webpage will not be affected. But "
+"using of deferring or async loading of jQuery causes lots of problems with "
+"jQuery plugins. This plugin replaces default Wordpress's JS loader with a "
+"special jQuery loader (jQl), that's why there are no any errors with jQuery "
+"plugins."
+msgstr ""
+"Загрузка JavaScript файлов должна осуществляться асинхронно, то есть "
+"неблокирующим способом, так как это не замедляет загрузку страницы. Но "
+"использование отложенной или асинхронной загрузки jQuery вызывает множество "
+"проблем с jQuery плагинами. Данный плагин заменяет стандартный загрузчик JS "
+"скриптов на специальный jQuery загрузчик (jQl), поэтому никаких проблем с "
+"плагинами возникать не будет."
+
+#: jquery-async-loader.php:239
+#, php-format
+msgid ""
+"%1$sIt's highly recommended to use any concatenate plugin,%2$s e.g., %3$s or "
+"%4$s.  Please, do not add jQuery to the ignore list, because this plugin "
+"fixes %5$sundefined jQuery%6$s errors on the console log. Also, it is "
+"allowed to use defer or async parsing of JS files."
+msgstr ""
+"%1$sКрайне рекомендуется использовать любой плагин для минификации и "
+"объединения JavaScript файлов,%2$s например, %3$s или %4$s. Пожалуйста, не "
+"добавляйте jQuery в список исключений, так как данный плагин решает проблемы "
+"с ошибками %5$sundefined jQuery%6$s в консоли разработчика. Также "
+"допускается использование отложенной (defer) и асинхронной (async) загрузки "
+"JS файлов."
+
+#: jquery-async-loader.php:244
+msgid "Replace jQuery library with&nbsp;minified CDN version (recommended)"
+msgstr "Заменить jQuery на&nbsp;сжатую CDN версию (рекомендуется)"
+
+#: jquery-async-loader.php:246
+msgid "Replace"
+msgstr "Заменить"
+
+#: jquery-async-loader.php:249
+msgid "Use it on the&nbsp;Back-end (admin&nbsp;pages)"
+msgstr "Применять в&nbsp;панели администратора"
+
+#: jquery-async-loader.php:251
+msgid "Enable"
+msgstr "Применять"
+
+#: jquery-async-loader.php:251
+msgid ""
+"It might be useful sometimes, but it's recommended to disable this option."
+msgstr ""
+"Иногда это бывает полезно, но всё же рекомендуется отключить данную опцию."
+
+#: jquery-async-loader.php:256
+msgid "Save Options"
+msgstr "Сохранить настройки"
+
+#: jquery-async-loader.php:259
+#, php-format
+msgid ""
+"For advanced users: If you're seeing any scripts loaded using %1$s<script>"
+"%2$s tag in your page source code (excluding Google Analytics, FB pixel, "
+"etc), please make sure that all the scripts are included correctly through "
+"%1$swp_enqueue_script%2$s or similar functions."
+msgstr ""
+"Для продвинутых пользователей: Если вы видите какие-либо скрипты, "
+"загруженные при помощи традиционного %1$s<script>%2$s тега в исходном коде "
+"вашей страницы (за исключением Яндекс.Метрики, Google Analytics, и т.п.), "
+"пожалуйста, убедитесь, что все скрипты загружаются корректно при помощи "
+"функции %1$swp_enqueue_script%2$s или аналогичных."
+
+#: jquery-async-loader.php:261
+#, php-format
+msgid "Special thanks to %1$s, who is the author of jQl."
+msgstr "Особая благодарность %1$s, автору jQl."
